@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <title>To Do</title>
+
+</head>
+<body>
+    <div class="ml-4">
+        <h1>Welcome</h1>
+        <div style="display: inline-block">
+            {% for item in all_items %}
+                <li>{{ item.content }}</li>
+                <form action="{% url 'deleteTodo' value=item.id %}"  method="post">
+                    {% csrf_token %}
+                    <input class="btn btn-dark btn-sm" type="submit" value="Delete">
+                </form>
+
+            {% endfor %}
+        </div>
+        <form action="{% url 'addTodo' %}" method="post">
+            {% csrf_token %}
+            <input class="mt-2" type="text" placeholder="Write Your To Do.." name="content">
+            <input class="btn btn-dark btn-sm mb-1" type="submit" value="Add">
+        </form>
+    </div>
+</body>
+</html>
